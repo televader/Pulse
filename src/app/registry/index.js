@@ -15,7 +15,7 @@ export const registry = [
   },
   {
     id: "tasks-combined",
-    title: "Tareas Combinadas",
+    title: "Tareas Activas",
     component: ComponenteC,
   },
 ];
