@@ -10,7 +10,7 @@ export function useApiGithubPrs({ from, to, status = "pending" }) {
       return mapGithubPrs(raw);
     },
     enabled: Boolean(from && to),
-    retry: 1,         // solo reintenta una vez
-    staleTime: 1000,   // evita refetch constante
+    retry: 1,
+    staleTime: 1000,
   });
 }
