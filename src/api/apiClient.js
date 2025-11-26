@@ -29,7 +29,7 @@ export async function apiClient(path, options = {}) {
     }
 
     const error = new Error(message);
-    error.status = res.status; // 🔥 CLAVE para manejo en React Query
+    error.status = res.status; 
     error.url = url;
 
     throw error;

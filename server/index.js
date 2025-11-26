@@ -105,7 +105,7 @@ app.get("/api/invented/tasks", (req, res) => {
 // ==================================================
 // 4) API INVENTADA — Builds fallidos
 // ==================================================
-const inventedBuilds2 = [
+const inventedBuilds = [
   { id: 301, branch: "main", status: "failed", date: "2025-01-10" },
   { id: 302, branch: "develop", status: "failed", date: "2025-02-21" },
   { id: 303, branch: "release", status: "failed", date: "2025-03-15" },

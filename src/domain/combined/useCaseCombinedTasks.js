@@ -5,38 +5,45 @@ import { mapOtherTasks } from "../other/mapOtherTasks";
 import { mapCombinedTasks } from "./mapCombinedTasks";
 
 export async function useCaseCombinedTasks({ status }) {
-  try {
-    console.log("Ejecutando useCaseCombinedTasks…");
+  console.log("Ejecutando useCaseCombinedTasks…");
 
-    const [jiraRaw, otherRaw] = await Promise.all([
-      fetchJiraTasks({ status }),
-      fetchOtherTasks({ status }),
-    ]);
+  const results = await Promise.allSettled([
+    fetchJiraTasks({ status }),
+    fetchOtherTasks({ status }),
+  ]);
 
-    const jira = mapJiraTasks(jiraRaw);
-    const other = mapOtherTasks(otherRaw);
+  const jiraResult = results[0];
+  const otherResult = results[1];
 
-    const jiraWithPlatform = jira.map((task) => ({
-      ...task,
-      plataforma: "jira",
-    }));
+  // Detectar si cada API fallo
+  const jiraFailed = jiraResult.status === "rejected";
+  const otherFailed = otherResult.status === "rejected";
 
-    const otherWithPlatform = other.map((task) => ({
-      ...task,
-      plataforma: "other",
-    }));
+  // si falla → array vacio
+  const jiraRaw = jiraFailed ? [] : jiraResult.value;
+  const otherRaw = otherFailed ? [] : otherResult.value;
 
-    const result = mapCombinedTasks(jiraWithPlatform, otherWithPlatform);
+  // Mapear dominio
+  const jira = mapJiraTasks(jiraRaw).map((task) => ({
+    ...task,
+    plataforma: "jira",
+  }));
 
-    console.log("Resultado final combineTasks:", result);
+  const other = mapOtherTasks(otherRaw).map((task) => ({
+    ...task,
+    plataforma: "other",
+  }));
 
-    return result;
-  } catch (err) {
-    console.error("Error en useCaseCombinedTasks:", {
-      status: err.status,
-      message: err.message,
-      url: err.url,
-    });
-    throw err;
-  }
+  // Combinar datos
+  const tasks = mapCombinedTasks(jira, other);
+
+  console.log("Resultado final combineTasks:", tasks);
+
+  // Objeto de errores para la UI
+  const errors = {
+    jiraFailed,
+    otherFailed,
+  };
+
+  return { tasks, errors };
 }
