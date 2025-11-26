@@ -13,7 +13,7 @@ export default function ComponenteB() {
   if (!from || !to) return <p>Seleccioná un rango de fechas.</p>;
   if (isLoading) return <p>Cargando builds fallidos...</p>;
 
-  if (isError) {
+  /* if (isError) {
     return (
       <div style={{ color: "red" }}>
         <p>Error al cargar builds: {error.message}</p>
@@ -22,7 +22,42 @@ export default function ComponenteB() {
     );
   }
 
-  if (!data?.length) return <p>No hay builds fallidos en este rango.</p>;
+  if (!data?.length) return <p>No hay builds fallidos en este rango.</p>; */
+
+ //  Manejo diferenciado de errores
+  if (isError) {
+    // Error de permisos (403)
+    if (error?.status === 403) {
+      return (
+        <div style={{ color: "red" }}>
+          <p>No tenés permisos para ver los builds fallidos.</p>
+        </div>
+      );
+    }
+
+    // Error de servidor (500)
+    if (error?.status === 500) {
+      return (
+        <div style={{ color: "red" }}>
+          <p>Hubo un problema en el servidor.</p>
+          <button onClick={() => refetch()}>Reintentar</button>
+        </div>
+      );
+    }
+
+    // error desconocido
+    return (
+      <div style={{ color: "red" }}>
+        <p>Error inesperado: {error.message}</p>
+        <button onClick={() => refetch()}>Reintentar</button>
+      </div>
+    );
+  }
+
+  // 🟦 Empty state
+  if (!data?.length)
+    return <p>No hay builds fallidos en este rango.</p>;
+
 
   return (
     <ul>

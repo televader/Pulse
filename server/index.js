@@ -105,7 +105,7 @@ app.get("/api/invented/tasks", (req, res) => {
 // ==================================================
 // 4) API INVENTADA — Builds fallidos
 // ==================================================
-const inventedBuilds = [
+const inventedBuilds2 = [
   { id: 301, branch: "main", status: "failed", date: "2025-01-10" },
   { id: 302, branch: "develop", status: "failed", date: "2025-02-21" },
   { id: 303, branch: "release", status: "failed", date: "2025-03-15" },
@@ -125,23 +125,6 @@ app.get("/api/invented/builds", (req, res) => {
 
   res.json(result);
 });
-
-// ==================================================
-// 5) COMBINED — Jira + Invented Tasks
-// ==================================================
-/* app.get("/api/combined/tasks", (req, res) => {
-  const { status } = req.query;
-
-  let combined = [...jiraTasks, ...inventedTasks];
-
-  if (status) {
-    combined = combined.filter(t => t.status === status);
-  }
-
-  combined.sort((a, b) => (a.date < b.date ? 1 : -1));
-
-  res.json(combined);
-}); */
 
 // ==================================================
 app.listen(4000, () => {

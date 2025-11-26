@@ -34,10 +34,5 @@ export async function apiClient(path, options = {}) {
 
     throw error;
   }
-  
- /*  if (!res.ok) {
-    throw new Error(`API error ${res.status} at ${url}`);
-  }
- */
   return res.json();
 }
