@@ -5,29 +5,23 @@ import { mapOtherTasks } from "../other/mapOtherTasks";
 import { mapCombinedTasks } from "./mapCombinedTasks";
 
 export async function useCaseCombinedTasks({ status }) {
-
-  const results = await Promise.allSettled([
+  const [jiraRaw, otherRaw] = await Promise.all([
     fetchJiraTasks({ status }),
     fetchOtherTasks({ status })
   ]);
 
-  const jiraResult = results[0];
-  const otherResult = results[1];
+  const jira = mapJiraTasks(jiraRaw);
+  const other = mapOtherTasks(otherRaw);
 
-  const jiraRaw = jiraResult.status === "fulfilled" ? jiraResult.value : [];
-  const otherRaw = otherResult.status === "fulfilled" ? otherResult.value : [];
-
-  const jira = mapJiraTasks(jiraRaw).map(task => ({
+  const jiraWithPlatform = jira.map(task => ({
     ...task,
     plataforma: "jira"
   }));
 
-  const other = mapOtherTasks(otherRaw).map(task => ({
+  const otherWithPlatform = other.map(task => ({
     ...task,
     plataforma: "other"
   }));
 
-  const finalTasks = mapCombinedTasks(jira, other);
-
-  return finalTasks;
+  return mapCombinedTasks(jiraWithPlatform, otherWithPlatform);
 }
