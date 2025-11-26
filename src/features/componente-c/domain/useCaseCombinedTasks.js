@@ -19,7 +19,7 @@ export async function useCaseCombinedTasks({ status }) {
   const jiraFailed = jiraResult.status === "rejected";
   const otherFailed = otherResult.status === "rejected";
 
-  // si falla → array vacio
+  // si falla da array vacio
   const jiraRaw = jiraFailed ? [] : jiraResult.value;
   const otherRaw = otherFailed ? [] : otherResult.value;
 
