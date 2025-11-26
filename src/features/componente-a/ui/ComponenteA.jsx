@@ -29,8 +29,7 @@ export default function ComponenteA() {
     <ul>
       {data.map((pr) => (
         <li key={pr.id} style={{ marginBottom: "1rem" }}>
-{/*           <strong>{pr.titulo}</strong> — {pr.autor}
- */}          <strong>{pr.title}</strong> — {pr.author}
+          <strong>{pr.title}</strong> — {pr.author}
           <br />
           Estado: {pr.status}
           <br />

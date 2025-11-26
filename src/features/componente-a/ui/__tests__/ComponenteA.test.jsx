@@ -2,9 +2,9 @@ import { render, screen } from "@testing-library/react";
 import ComponenteA from "../ComponenteA";
 import { wrapperProviders } from "../../../../test-utils/renderWithProviders";
 import { MockDateRangeProvider } from "../../../../test-utils/mockDateRangeProvider";
-import * as api from "../../api/useApiGithubPrs";   // 👈 IMPORTAR PRIMERO
+import * as api from "../../api/useApiGithubPrs";
 
-jest.mock("../../api/useApiGithubPrs");             // 👈 MOCKEAR DESPUÉS
+jest.mock("../../api/useApiGithubPrs");    
 
 function renderWithAll(ui) {
   return render(

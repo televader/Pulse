@@ -15,7 +15,6 @@ export default function ComponenteB() {
 
   //  Manejo diferenciado de errores
   if (isError) {
-    // Error de permisos (403)
     if (error?.status === 403) {
       return (
         <div style={{ color: "red" }}>
@@ -24,7 +23,6 @@ export default function ComponenteB() {
       );
     }
 
-    // Error de servidor (500)
     if (error?.status === 500) {
       return (
         <div style={{ color: "red" }}>

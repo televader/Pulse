@@ -23,7 +23,7 @@ test("muestra listado de builds con branch, status y fecha", () => {
         branch: "main",
         title: "Pipeline error",
         status: "failed",
-        date: new Date(2024, 11, 30) // 👈 30/12/2024 sin saltos de timezone
+        date: new Date(2024, 11, 30)
       }
     ]
   });
@@ -35,6 +35,5 @@ test("muestra listado de builds con branch, status y fecha", () => {
   expect(screen.getByText("Status:")).toBeInTheDocument();
   expect(screen.getByText((t) => t.includes("failed"))).toBeInTheDocument();
 
-  // fecha sin timezone issues
   expect(screen.getByText((t) => t.includes("30/12/2024"))).toBeInTheDocument();
 });
