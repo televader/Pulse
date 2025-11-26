@@ -1,7 +1,7 @@
-import { fetchJiraTasks } from "../../api/fetchJiraTasks";
-import { fetchOtherTasks } from "../../api/fetchOtherTasks";
-import { mapJiraTasks } from "../jira/mapJiraTasks";
-import { mapOtherTasks } from "../other/mapOtherTasks";
+import { fetchJiraTasks } from "../api/fetchJiraTasks";
+import { fetchOtherTasks } from "../api/fetchOtherTasks";
+import { mapJiraTasks } from "./mapJiraTasks";
+import { mapOtherTasks } from "./mapOtherTasks";
 import { mapCombinedTasks } from "./mapCombinedTasks";
 
 export async function useCaseCombinedTasks({ status }) {

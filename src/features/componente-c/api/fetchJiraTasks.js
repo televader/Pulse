@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from "../../../api/apiClient";
 
 export async function fetchJiraTasks({ status }) {
   const query = status ? `?status=${status}` : "";

@@ -1,4 +1,4 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from "../../../api/apiClient";
 
 export async function fetchOthersBuilds({ from, to }) {
   let query = "";

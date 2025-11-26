@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchGithubPrs } from "../../../api/fetchGithubPrs";
-import { mapGithubPrs } from "../../../domain/github/mapGithubPrs";
+import { fetchGithubPrs } from "./fetchGithubPrs";
+import { mapGithubPrs } from "../domain/mapGithubPrs";
 
 export function useApiGithubPrs({ from, to, status = "pending" }) {
   return useQuery({

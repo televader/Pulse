@@ -1,4 +1,6 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from "../../../api/apiClient";
+
+
 
 export async function fetchGithubPrs({ from, to, status }) {
   const queryParts = [];

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { fetchOthersBuilds } from "../../../api/fetchOthersBuilds";
-import { mapOtherBuilds } from "../../../domain/other/mapOtherBuilds";
+import { fetchOthersBuilds } from "./fetchOthersBuilds";
+import { mapOtherBuilds } from "../domain/mapOtherBuilds";
 
 export function useApiBuilds({ from, to }) {
   return useQuery({

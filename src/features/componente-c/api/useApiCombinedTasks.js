@@ -13,7 +13,7 @@ export function useApiCombinedTasks({ status = "pending" }) {
  */
 
 import { useQuery } from "@tanstack/react-query";
-import { useCaseCombinedTasks } from "../../../domain/combined/useCaseCombinedTasks";
+import { useCaseCombinedTasks } from "../domain/useCaseCombinedTasks";
 
 export function useApiCombinedTasks({ status = "pending" }) {
   return useQuery({
