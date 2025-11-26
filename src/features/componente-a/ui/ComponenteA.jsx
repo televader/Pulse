@@ -8,7 +8,7 @@ export default function ComponenteA() {
   const { data, isLoading, isError, error, refetch } = useApiGithubPrs({
     from,
     to,
-    status: "pending"
+    status: "pending",
   });
 
   if (!from || !to) return <p>Seleccioná un rango de fechas.</p>;
@@ -27,9 +27,10 @@ export default function ComponenteA() {
 
   return (
     <ul>
-      {data.map(pr => (
+      {data.map((pr) => (
         <li key={pr.id} style={{ marginBottom: "1rem" }}>
-          <strong>{pr.titulo}</strong> — {pr.autor}
+{/*           <strong>{pr.titulo}</strong> — {pr.autor}
+ */}          <strong>{pr.title}</strong> — {pr.author}
           <br />
           Estado: {pr.status}
           <br />
