@@ -10,6 +10,15 @@ export function useApiBuilds({ from, to }) {
       return mapOtherBuilds(raw);
     },
     enabled: Boolean(from && to),
-    retry: 1
-  });
+ retry: (failureCount, error) => {
+      console.warn("⚠️ Retry handler:", failureCount, error);
+
+      if (error?.status === 403) {
+        console.warn("⛔ No se reintenta porque es 403 (Forbidden)");
+        return false;
+      }
+
+      // Para 500 reintentás 2 veces
+      return failureCount < 2;
+    }  });
 }
